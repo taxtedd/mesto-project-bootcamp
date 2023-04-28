@@ -1,0 +1,5 @@
+.profile__name {
+  margin: 0;
+  grid-row: 1;
+  grid-column: 1;
+}

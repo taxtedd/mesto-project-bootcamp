@@ -1,15 +1,13 @@
-.profile {
+.profile__info {
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
   column-gap: 30px;
-  width: 100%;
 }
 
 @media screen and (max-width: 767px) {
-  .profile {
+  .profile__info {
     flex-direction: column;
-    row-gap: 36px;
+    row-gap: 26px;
   }
 }
