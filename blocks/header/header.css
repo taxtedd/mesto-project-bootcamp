@@ -1,0 +1,11 @@
+.header {
+  padding-top: 45px;
+  min-width: calc((880/1280)*100%);
+  border-bottom: solid 1px #545454;
+}
+
+@media screen and (max-width: 1279px) {
+  .header {
+    min-width: calc(100vw*(928/1024));
+  }
+}
