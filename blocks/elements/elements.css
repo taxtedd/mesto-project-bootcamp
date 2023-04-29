@@ -1,0 +1,19 @@
+.elements {
+  display: grid;
+  grid-template-columns: min-content min-content min-content;
+  grid-auto-rows: min-content;
+  row-gap: 20px;
+  column-gap: 17px;
+}
+
+@media screen and (max-width: 1023px) {
+  .elements {
+    grid-template-columns: min-content min-content;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .elements {
+    grid-template-columns: min-content;
+  }
+}

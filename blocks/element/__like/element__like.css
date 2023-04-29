@@ -1,0 +1,14 @@
+.element__like {
+  width: 22px;
+  height: 19px;
+  background-image: url(../../../images/GroupLike.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  border: transparent;
+}
+
+.element__like:hover {
+  background-image: url(../../../images/VectorHoverLike.svg);
+  cursor: pointer;
+}

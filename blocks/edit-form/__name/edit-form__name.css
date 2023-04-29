@@ -1,0 +1,9 @@
+.edit-form__name {
+  padding: 0 0 13px 0;
+  border: 0;
+  border-bottom: solid 1px rgb(0,0,0,0.2);
+  width: 100%;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}

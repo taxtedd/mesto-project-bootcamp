@@ -9,5 +9,6 @@
   .profile__info {
     flex-direction: column;
     row-gap: 26px;
+    width: 100%;
   }
 }

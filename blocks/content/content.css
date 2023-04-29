@@ -1,5 +1,5 @@
 .content {
-  min-width: calc((880/1280)*100vw);
+  max-width: min(calc((880/1280)*100vw), 880px);
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -4,11 +4,16 @@
   flex-direction: row;
   justify-items: flex-start;
   margin: 66px 0 60px;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
 }
 
 @media screen and (max-width: 767px) {
   .footer {
     margin-top: calc((48/320)*100vw);
     margin-bottom: calc((36/320)*100vw);
+    font-size: 14px;
+    line-height: 17px;
   }
 }

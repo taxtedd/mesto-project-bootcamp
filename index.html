@@ -8,6 +8,19 @@
 </head>
 <body>
   <div class="page">
+    <div class="popup">
+      <div class="popup__container">
+        <button type="button" class="popup__exit-button"></button>
+        <form class="edit-form">
+          <h2 class="edit-form__heading">Редактировать профиль</h2>
+          <fieldset class="edit-form__input-container">
+            <input type="text" class="edit-form__name" placeholder="Имя" value="Жак-Ив Кусто"></input>
+            <input type="text" class="edit-form__description" placeholder="Описание" value="Исследователь океана"></input>
+          </fieldset>
+          <button type="submit" class="edit-form__save-button">Сохранить</button>
+        </form>
+      </div>
+    </div>
     <header class="header">
       <img class="header__logo" src="./images/VectorLogo.svg" alt="логотип">
     </header>
@@ -28,7 +41,48 @@
         </button>
       </section>
       <section class="elements">
-
+        <div class="element">
+          <img class="element__image" src="https://7d9e88a8-f178-4098-bea5-48d960920605.selcdn.net/3dc17e2e-6c5e-47a9-9019-1919d41fd767/-/format/jpeg/-/quality/lighter/-/stretch/off/-/resize/1900x/" alt="фото">
+          <div class="element__info">
+            <h2 class="element__title">Петергоф</h2>
+            <button type="button" class="element__like"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="https://onemoscow.ru/wp-content/uploads/2021/03/moskva-rossiia-krasnaia-ploshchad-ploshchad-tsvety-nebo.jpg" alt="фото">
+          <div class="element__info">
+            <h2 class="element__title">Красная площадь</h2>
+            <button type="button" class="element__like"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="https://cdnn21.img.ria.ru/images/152155/85/1521558559_0:228:4368:2685_600x0_80_0_0_7096fe3ad8a519ec93377d5289428862.jpg" alt="фото">
+          <div class="element__info">
+            <h2 class="element__title">Алтай</h2>
+            <button type="button" class="element__like"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="https://thumb.tildacdn.com/tild6162-3235-4939-b765-333931613137/-/resize/824x/-/format/webp/shutterstock_1399371.jpg" alt="фото">
+          <div class="element__info">
+            <h2 class="element__title">Байкал</h2>
+            <button type="button" class="element__like"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="https://anapacity.com/images/uploads/chernoe-more2.jpg" alt="фото">
+          <div class="element__info">
+            <h2 class="element__title">Чёрное море</h2>
+            <button type="button" class="element__like"></button>
+          </div>
+        </div>
+        <div class="element">
+          <img class="element__image" src="https://putidorogi-nn.ru/images/stories/evropa/rossiya/nizhegorodskiy-kreml_2.jpg" alt="фото">
+          <div class="element__info">
+            <h2 class="element__title">Нижегородский Кремль</h2>
+            <button type="button" class="element__like"></button>
+          </div>
+        </div>
       </section>
     </main>
     <footer class="footer">

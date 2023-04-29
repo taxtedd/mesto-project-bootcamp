@@ -2,4 +2,19 @@
   margin: 0;
   grid-row: 1;
   grid-column: 1;
+  max-width: calc((508/1280)*100vw);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 1.14;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__name {
+    max-width: calc((254/320)*100vw);
+    font-size: 27px;
+    line-height: 33px;
+  }
 }
