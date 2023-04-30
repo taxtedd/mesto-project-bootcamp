@@ -3,13 +3,11 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  column-gap: 30px;
   width: 100%;
 }
 
 @media screen and (max-width: 1023px) {
   .profile {
     flex-direction: column;
-    row-gap: 36px;
   }
 }

@@ -2,7 +2,7 @@
   padding-top: 45px;
   margin-bottom: 40px;
   min-width: calc((880/1280)*100%);
-  border-bottom: solid 1px #545454;
+  border-bottom: solid 1px rgb(255,255,255,0.25);
 }
 
 @media screen and (max-width: 767px) {
@@ -10,5 +10,6 @@
     width: 100%;
     padding-top: calc((18/320)*100vw);
     margin-bottom: 42px;
+    padding-top: 28px;
   }
 }

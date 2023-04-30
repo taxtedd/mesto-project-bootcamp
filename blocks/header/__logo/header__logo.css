@@ -9,5 +9,6 @@
   .header__logo {
     width: calc((103.74/320)*100vw);
     margin-left: calc((27/320)*100vw);
+    margin-bottom: 31.6px;
   }
 }

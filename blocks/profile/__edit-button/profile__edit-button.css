@@ -6,6 +6,12 @@
   border: solid 1px white;
   grid-row: 1;
   grid-column: 2;
+  background-image: url(../../../images/VectorEdit-button.svg);
+  background-size: fill;
+  background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  align-self: center;
 }
 
 .profile__edit-button:hover {
