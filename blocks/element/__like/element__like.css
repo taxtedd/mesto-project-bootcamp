@@ -10,6 +10,6 @@
 }
 
 .element__like:hover {
-  background-image: url(../../../images/VectorHoverLike.svg);
+  opacity: 0.5;
   cursor: pointer;
 }
