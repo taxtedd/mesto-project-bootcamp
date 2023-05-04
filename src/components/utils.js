@@ -1,4 +1,6 @@
 import {keyExitPopup} from './modal.js'
+import {enableValidationData as parametrs} from './index.js'
+import {toggleButtonState} from './validate.js'
 
 const editPopup = document.querySelector('.popup_type_edit');
 const addPopup = document.querySelector('.popup_type_add');
@@ -7,6 +9,8 @@ const imagePopup = document.querySelector('.popup_type_image');
 const profileForm = document.forms.profileForm;
 const nameInput = profileForm.elements.name;
 const descriptionInput = profileForm.elements.description;
+
+const addFrom = addPopup.querySelector('.popup__form');
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
@@ -32,6 +36,13 @@ function openPopup(evt) {
   } else if (evt.target.classList.contains('profile__edit-button')) {
     setEditPopupFields();
     popup = editPopup;
+  } else {
+    addFrom.reset();
+
+    const inputList = Array.from(addFrom.querySelectorAll(parametrs.inputSelector));
+    const buttonElement = addFrom.querySelector(parametrs.submitButtonSelector);
+
+    toggleButtonState(inputList, buttonElement, parametrs.inactiveButtonClass);
   }
 
   document.addEventListener('keydown', keyExitPopup);

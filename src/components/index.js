@@ -13,7 +13,7 @@ import {
   exitPopup,
   placeForm
 } from './modal.js'
-// import {enableValidation} from './validate.js'
+import {enableValidation} from './validate.js'
 
 const popups = document.querySelectorAll('.popup');
 const editButton = document.querySelector('.profile__edit-button');
@@ -46,7 +46,7 @@ const initialCards = [
   }
 ];
 
-const enableValidationData = {
+export const enableValidationData = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__save-button',
@@ -62,6 +62,6 @@ profileForm.addEventListener('submit', handleProfileFormSubmit);
 placeForm.addEventListener('submit', handlePlaceFormSubmit);
 elements.addEventListener('click', elementsAddEventListener);
 
-// enableValidation(enableValidationData);
+enableValidation(enableValidationData);
 
 initialCards.forEach(item => addElement(item));

@@ -1,41 +1,58 @@
-const formList = Array.from(document.querySelectorAll('.form'));
+function hasInvalidInput(inputList) {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+}
 
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
-  inputElement.classList.add('popup__input_type_error');
-  errorElement.textContent = errorMessage;
-  errorElement.classList.add('popup__input-error_active');
-};
-
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
-
-  inputElement.classList.remove('popup__input_type_error');
-  errorElement.classList.remove('popup__input-error_active');
-  errorElement.textContent = '';
-};
-
-function isValid (formElement, inputElement) {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
+function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add(inactiveButtonClass);
   } else {
-    hideInputError(formElement, inputElement);
+    buttonElement.classList.remove(inactiveButtonClass);
   }
 }
 
-function setEventListeners(formElement) {
-  const inputList = Array.from(formElement.querySelectorAll('.popup__input'));
+function showInputError(formElement, inputElement, errorMessage, parametrs) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+
+  inputElement.classList.add(parametrs.inputErrorClass);
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add(parametrs.errorClass);
+}
+
+function hideInputError(formElement, inputElement, parametrs) {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+
+  inputElement.classList.remove(parametrs.inputErrorClass);
+  errorElement.classList.remove(parametrs.errorClass);
+  errorElement.textContent = '';
+}
+
+function isValid(formElement, inputElement, parametrs) {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage, parametrs);
+  } else {
+    hideInputError(formElement, inputElement, parametrs);
+  }
+}
+
+function setEventListeners(formElement, parametrs) {
+  const inputList = Array.from(formElement.querySelectorAll(parametrs.inputSelector));
+  const buttonElement = formElement.querySelector(parametrs.submitButtonSelector);
+
+  toggleButtonState(inputList, buttonElement, parametrs.inactiveButtonClass);
 
   inputList.forEach((inputElement) => {
     inputElement.addEventListener('input', () => {
-      isValid(formElement, inputElement)
+      isValid(formElement, inputElement, parametrs);
+      toggleButtonState(inputList, buttonElement, parametrs.inactiveButtonClass);
     });
   });
 }
 
-function enableValidation(){
-  formList.forEach((formElement) => {setEventListeners(formElement)});
+function enableValidation(parametrs){
+  const formList = Array.from(document.querySelectorAll(parametrs.formSelector));
+  formList.forEach((formElement) => {setEventListeners(formElement, parametrs)});
 }
 
-export {enableValidation}
+export {enableValidation, toggleButtonState}
