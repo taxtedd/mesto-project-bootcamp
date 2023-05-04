@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
     <title>Место</title>
   </head>
   <body>
@@ -46,12 +45,12 @@
         </div>
       </div>
       <header class="header">
-        <img class="header__logo" src="./images/VectorLogo.svg" alt="логотип">
+        <img class="header__logo" src="<%=require('./images/VectorLogo.svg')%>" alt="логотип">
       </header>
       <main class="content">
         <section class="profile">
           <div class="profile__info">
-            <img class="profile__image" src="./images/imageprofile_image.png" alt="аватарка">
+            <img class="profile__image" src="<%=require('./images/imageprofile_image.png')%>" alt="аватарка">
             <div class="profile__about">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
               <p class="profile__description">Исследователь океана</p>
@@ -77,6 +76,5 @@
         </div>
       </article>
     </template>
-    <script type="module" src="./components/index.js"></script>
   </body>
 </html>
