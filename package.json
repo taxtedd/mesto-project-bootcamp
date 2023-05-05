@@ -9,6 +9,10 @@
   },
   "author": "Tatiana",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/taxtedd/mesto-project-bootcamp/issues"
+  },
+  "homepage": "https://github.com/taxtedd/mesto-project-bootcamp#readme",
   "devDependencies": {
     "@babel/core": "^7.21.8",
     "@babel/preset-env": "^7.21.5",

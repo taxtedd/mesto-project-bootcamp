@@ -1,6 +1,7 @@
 import {openPopup} from './utils.js'
+import {imagePopup, setImagePopupFields} from './modal.js'
 
-const elements = document.querySelector('.elements');
+export const elements = document.querySelector('.elements');
 const elementTemplate = document.querySelector('#element-template').content;
 
 function createCard(place) {
@@ -14,7 +15,7 @@ function createCard(place) {
   return cardElement;
 }
 
-function addElement(place) {
+export function addElement(place) {
   const element = createCard(place);
   elements.prepend(element);
 }
@@ -28,18 +29,14 @@ function deleteElement(button) {
   element.remove();
 }
 
-function elementsAddEventListener(evt) {
+export function elementsAddEventListener(evt) {
   if (evt.target.classList.contains('element__like')) {
     likeElement(evt.target);
   } else if (evt.target.classList.contains('element__delete')) {
     deleteElement(evt.target);
   } else if (evt.target.classList.contains('element__image')) {
-    openPopup(evt);
+    const element = evt.target.closest('.element');
+    setImagePopupFields(element);
+    openPopup(imagePopup);
   }
-}
-
-export {
-  elements,
-  addElement,
-  elementsAddEventListener
 }

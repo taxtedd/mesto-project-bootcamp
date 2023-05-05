@@ -1,8 +1,9 @@
 import '../pages/index.css';
 
 import {
-  profileForm,
-  openPopup
+  openPopup,
+  editPopup,
+  addPopup
 } from './utils.js'
 import {
   elements,
@@ -10,16 +11,17 @@ import {
   elementsAddEventListener
 } from './card.js'
 import {
+  profileForm,
   handleProfileFormSubmit,
   handlePlaceFormSubmit,
   exitPopup,
-  placeForm
+  placeForm,
+  setEditPopupFields
 } from './modal.js'
-import {enableValidation} from './validate.js'
-
-const popups = document.querySelectorAll('.popup');
-const editButton = document.querySelector('.profile__edit-button');
-const addButton = document.querySelector('.profile__add-button');
+import {
+  enableValidation,
+  toggleButtonState
+} from './validate.js'
 
 const initialCards = [
   {
@@ -57,9 +59,29 @@ export const enableValidationData = {
   errorClass: 'popup__error_visible'
 };
 
+const popups = document.querySelectorAll('.popup');
+const editButton = document.querySelector('.profile__edit-button');
+const addButton = document.querySelector('.profile__add-button');
+
+const editPopupSubmitButton = editPopup.querySelector(enableValidationData.submitButtonSelector);
+const addPopupSubmitButton = addPopup.querySelector(enableValidationData.submitButtonSelector);
+
+const addForm = addPopup.querySelector('.popup__form');
+
+const editInputList = Array.from(editPopup.querySelectorAll(enableValidationData.inputSelector));
+const addInputList = Array.from(addPopup.querySelectorAll(enableValidationData.inputSelector));
+
 popups.forEach((popup) => popup.addEventListener('click', exitPopup));
-editButton.addEventListener('click', openPopup);
-addButton.addEventListener('click', openPopup);
+editButton.addEventListener('click', () => {
+  setEditPopupFields();
+  toggleButtonState(editInputList, editPopupSubmitButton, enableValidationData.inactiveButtonClass); 
+  openPopup(editPopup);
+});
+addButton.addEventListener('click', () => {
+  addForm.reset();
+  toggleButtonState(addInputList, addPopupSubmitButton, enableValidationData.inactiveButtonClass);
+  openPopup(addPopup);
+});
 profileForm.addEventListener('submit', handleProfileFormSubmit);
 placeForm.addEventListener('submit', handlePlaceFormSubmit);
 elements.addEventListener('click', elementsAddEventListener);
