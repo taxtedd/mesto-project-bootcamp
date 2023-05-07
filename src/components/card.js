@@ -4,7 +4,6 @@ import {
   setImagePopupFields
 } from './modal.js'
 import { 
-  getUserInfo,
   deleteCard,
   addLike,
   deleteLike
@@ -25,7 +24,7 @@ function createCard(card) {
   
   if (thisUser._id != card.owner._id) {
     const button = cardElement.querySelector('.element__delete');
-    cardElement.removeChild(button);
+    button.remove();
   }
 
   const iLiked = card.likes.find((userInformation) => userInformation._id === thisUser._id);

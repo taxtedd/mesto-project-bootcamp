@@ -48,10 +48,6 @@ export function setEditPopupFields() {
   descriptionInput.value = profileDescription.textContent;
 }
 
-export function setAvatarPopupFields(){
-  avatarInput.value = profileAvatar.src;
-}
-
 export function setProfileFields(name, description, link=profileAvatar.src){
   profileName.textContent = name;
   profileDescription.textContent = description;
@@ -65,13 +61,13 @@ export function handleProfileFormSubmit(evt) {
   updateUserInfo({name: nameInput.value, about: descriptionInput.value})
     .then(user => {
       setProfileFields(user.name, user.about);
+      closePopup(editPopup);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       renderLoading(false, profileButton);
-      closePopup(editPopup);
     });
 }
 
@@ -83,14 +79,14 @@ export function handlePlaceFormSubmit(evt) {
   addCard({name: titleInput.value, link: linkInput.value})
     .then(card => {
       addElement(card);
+      evt.target.reset();
+      closePopup(addPopup);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       renderLoading(false, placeButton);
-      evt.target.reset();
-      closePopup(addPopup);
     });
 }
 
@@ -102,14 +98,14 @@ export function handleAvatarFormSubmit(evt) {
   updateUserAvatar(avatarInput.value)  
     .then(image => {
       profileAvatar.src = image.avatar;
+      evt.target.reset();
+      closePopup(avatarPopup);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
       renderLoading(false, avatarButton);
-      evt.target.reset();
-      closePopup(avatarPopup);
     })
 }
 

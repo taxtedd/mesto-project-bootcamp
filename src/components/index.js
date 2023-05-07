@@ -19,7 +19,6 @@ import {
   editPopup,
   addPopup,
   avatarPopup,
-  setAvatarPopupFields,
   avatarForm,
   setProfileFields
 } from './modal.js'
@@ -73,7 +72,6 @@ addButton.addEventListener('click', () => {
 });
 
 avatarButton.addEventListener('click', () => {
-  setAvatarPopupFields();
   toggleButtonState(avatarInputList, avatarPopupSubmitButton, enableValidationData.inactiveButtonClass); 
   openPopup(avatarPopup);
 });
@@ -88,21 +86,17 @@ elements.addEventListener('click', elementsAddEventListener);
 
 enableValidation(enableValidationData);
 
-getInitialCards()
-  .then(cards => {
-    for (let i = cards.length - 1; i>=0; i--) {
-      addElement(cards[i]);
-    }
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-
-getUserInfo()
-  .then(user => {
+Promise.all([
+getUserInfo(), 
+getInitialCards() ])
+  .then(([user, initialCards])=>{
     setProfileFields(user.name, user.about, user.avatar);
     thisUser = user;
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+
+    for (let i = initialCards.length - 1; i>=0; i--) {
+      addElement(initialCards[i]);
+    }
+  }) 
+  .catch((err)=>{
+  console.log(err);
+   }) 
