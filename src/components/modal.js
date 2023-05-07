@@ -1,9 +1,21 @@
 import {
-  editPopup,
-  addPopup,
   closePopup
 } from './utils.js'
-import {addElement} from './card.js'
+import { 
+  addElement 
+} from './card.js'
+import { 
+  updateUserInfo,
+  addCard,
+  updateUserAvatar
+} from './api.js';
+
+export const editPopup = document.querySelector('.popup_type_edit');
+export const addPopup = document.querySelector('.popup_type_add');
+
+export const avatarPopup = document.querySelector('.popup_type_avatar');
+export const avatarForm = document.forms.avatarForm;
+const avatarInput = avatarForm.elements.link;
 
 export const placeForm = document.forms.placeForm;
 const titleInput = placeForm.elements.title;
@@ -15,10 +27,15 @@ const descriptionInput = profileForm.elements.description;
 
 const profileName = document.querySelector('.profile__name');
 const profileDescription = document.querySelector('.profile__description');
+const profileAvatar = document.querySelector('.profile__image');
 
 export const imagePopup = document.querySelector('.popup_type_image');
 const imageInput = imagePopup.querySelector('.popup__image');
 const headingInput = imagePopup.querySelector('.popup__heading');
+
+const placeButton = placeForm.querySelector('.popup__save-button');
+const profileButton = profileForm.querySelector('.popup__save-button');
+const avatarButton = avatarForm.querySelector('.popup__save-button');
 
 export function setImagePopupFields(element) {
   imageInput.src = element.querySelector('.element__image').src;
@@ -31,22 +48,69 @@ export function setEditPopupFields() {
   descriptionInput.value = profileDescription.textContent;
 }
 
+export function setAvatarPopupFields(){
+  avatarInput.value = profileAvatar.src;
+}
+
+export function setProfileFields(name, description, link=profileAvatar.src){
+  profileName.textContent = name;
+  profileDescription.textContent = description;
+  profileAvatar.src = link;
+}
+
 export function handleProfileFormSubmit(evt) {
   evt.preventDefault();
+  renderLoading(true, profileButton);
 
-  profileName.textContent = nameInput.value;
-  profileDescription.textContent = descriptionInput.value;
-
-  closePopup(editPopup);
+  updateUserInfo({name: nameInput.value, about: descriptionInput.value})
+    .then(user => {
+      setProfileFields(user.name, user.about);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, profileButton);
+      closePopup(editPopup);
+    });
 }
 
 export function handlePlaceFormSubmit(evt) {
   evt.preventDefault();
 
-  addElement({name: titleInput.value, link: linkInput.value});
-  evt.target.reset();
+  renderLoading(true, placeButton);
 
-  closePopup(addPopup);
+  addCard({name: titleInput.value, link: linkInput.value})
+    .then(card => {
+      addElement(card);
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, placeButton);
+      evt.target.reset();
+      closePopup(addPopup);
+    });
+}
+
+export function handleAvatarFormSubmit(evt) {
+  evt.preventDefault();
+
+  renderLoading(true, avatarButton);
+
+  updateUserAvatar(avatarInput.value)  
+    .then(image => {
+      profileAvatar.src = image.avatar;
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => {
+      renderLoading(false, avatarButton);
+      evt.target.reset();
+      closePopup(avatarPopup);
+    })
 }
 
 export function exitPopup(evt) {
@@ -62,4 +126,13 @@ export function exitPopupWithKey(evt) {
     const openedPopup = document.querySelector('.popup_opened');
     closePopup(openedPopup);
   } 
+}
+
+function renderLoading(isLoading, button) {
+  if (isLoading) {
+    console.log(button.textContent);
+    button.textContent = "Сохранение...";
+  } else {
+    button.textContent = "Сохранить";
+  }
 }

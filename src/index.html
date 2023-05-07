@@ -44,20 +44,37 @@
           <h2 class="popup__heading"></h2>
         </div>
       </div>
+      <div class="popup popup_type_avatar">
+        <div class="popup__container">
+          <button type="button" class="popup__exit-button" aria-label="Выйти"></button>
+          <form class="popup__form" name="avatarForm" novalidate>
+            <h2 class="popup__form-heading">Обновить аватар</h2>
+            <fieldset class="popup__input-container">
+              <input type="url" name="link" id="link-input" class="popup__input popup__input_type_avatar-link" placeholder="Ссылка на аватарку" autocomplete="off" required>
+              <span class="popup__error link-input-error"></span>
+            </fieldset>
+            <button type="submit" class="popup__save-button">Сохранить</button>
+          </form>
+        </div>
+      </div>
       <header class="header">
         <img class="header__logo" src="<%=require('./images/VectorLogo.svg')%>" alt="логотип">
       </header>
       <main class="content">
         <section class="profile">
           <div class="profile__info">
-            <img class="profile__image" src="<%=require('./images/imageprofile_image.png')%>" alt="аватарка">
+            <div class="profile__avatar">
+              <button type="button" class="profile__image-button" aria-label="редактировать аватарку">
+                <img class="profile__image" src="<%=require('./images/imageprofile_image.png')%>" alt="аватарка">
+              </button>
+            </div>
             <div class="profile__about">
-              <h1 class="profile__name">Жак-Ив Кусто</h1>
-              <p class="profile__description">Исследователь океана</p>
-              <button type="button" class="profile__edit-button" aria-label="Редактировать"></button>
+              <h1 class="profile__name"></h1>
+              <p class="profile__description"></p>
+              <button type="button" class="profile__edit-button" aria-label="редактировать"></button>
             </div>
           </div>
-          <button type="button" class="profile__add-button" aria-label="Добавить изображение"></button>
+          <button type="button" class="profile__add-button" aria-label="добавить изображение"></button>
         </section>
         <section class="elements">
         </section>
@@ -72,7 +89,10 @@
         <img class="element__image">
         <div class="element__info">
           <h2 class="element__title"></h2>
-          <button type="button" class="element__like" aria-label="лайк"></button>
+          <div class="element__like-container">
+            <button type="button" class="element__like" aria-label="лайк"></button>
+            <p class="element__like-counter"></p>
+          </div>
         </div>
       </article>
     </template>

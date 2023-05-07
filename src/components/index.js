@@ -2,53 +2,35 @@ import '../pages/index.css';
 
 import {
   openPopup,
-  editPopup,
-  addPopup
 } from './utils.js'
 import {
   elements,
-  addElement,
-  elementsAddEventListener
+  elementsAddEventListener,
+  addElement
 } from './card.js'
 import {
   profileForm,
   handleProfileFormSubmit,
   handlePlaceFormSubmit,
+  handleAvatarFormSubmit,
   exitPopup,
   placeForm,
-  setEditPopupFields
+  setEditPopupFields,
+  editPopup,
+  addPopup,
+  avatarPopup,
+  setAvatarPopupFields,
+  avatarForm,
+  setProfileFields
 } from './modal.js'
 import {
   enableValidation,
   toggleButtonState
 } from './validate.js'
-
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
+import {
+  getInitialCards,
+  getUserInfo
+} from './api.js'
 
 export const enableValidationData = {
   formSelector: '.popup__form',
@@ -62,30 +44,65 @@ export const enableValidationData = {
 const popups = document.querySelectorAll('.popup');
 const editButton = document.querySelector('.profile__edit-button');
 const addButton = document.querySelector('.profile__add-button');
+const avatarButton = document.querySelector('.profile__image-button');
 
 const editPopupSubmitButton = editPopup.querySelector(enableValidationData.submitButtonSelector);
 const addPopupSubmitButton = addPopup.querySelector(enableValidationData.submitButtonSelector);
+const avatarPopupSubmitButton = avatarPopup.querySelector(enableValidationData.submitButtonSelector);
 
 const addForm = addPopup.querySelector('.popup__form');
 
 const editInputList = Array.from(editPopup.querySelectorAll(enableValidationData.inputSelector));
 const addInputList = Array.from(addPopup.querySelectorAll(enableValidationData.inputSelector));
+const avatarInputList = Array.from(avatarPopup.querySelectorAll(enableValidationData.inputSelector));
+
+export let thisUser = {};
 
 popups.forEach((popup) => popup.addEventListener('click', exitPopup));
+
 editButton.addEventListener('click', () => {
   setEditPopupFields();
   toggleButtonState(editInputList, editPopupSubmitButton, enableValidationData.inactiveButtonClass); 
   openPopup(editPopup);
 });
+
 addButton.addEventListener('click', () => {
   addForm.reset();
   toggleButtonState(addInputList, addPopupSubmitButton, enableValidationData.inactiveButtonClass);
   openPopup(addPopup);
 });
+
+avatarButton.addEventListener('click', () => {
+  setAvatarPopupFields();
+  toggleButtonState(avatarInputList, avatarPopupSubmitButton, enableValidationData.inactiveButtonClass); 
+  openPopup(avatarPopup);
+});
+
 profileForm.addEventListener('submit', handleProfileFormSubmit);
+
 placeForm.addEventListener('submit', handlePlaceFormSubmit);
+
+avatarForm.addEventListener('submit', handleAvatarFormSubmit);
+
 elements.addEventListener('click', elementsAddEventListener);
 
 enableValidation(enableValidationData);
 
-initialCards.forEach(item => addElement(item));
+getInitialCards()
+  .then(cards => {
+    for (let i = cards.length - 1; i>=0; i--) {
+      addElement(cards[i]);
+    }
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
+getUserInfo()
+  .then(user => {
+    setProfileFields(user.name, user.about, user.avatar);
+    thisUser = user;
+  })
+  .catch((err) => {
+    console.log(err);
+  });
